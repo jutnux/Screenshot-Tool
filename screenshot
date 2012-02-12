@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#####
+# Feel free to use at will.
+#####
+
+USER="" # the username for the login
+SERVER="" # the server which you are uploading to
+DIR="~/screenshots" # the directory which you are uploading to
+FILENAME="$(date -d 'today' +%d-%m-%Y-%H.%M)"
+SITE="$SERVER/screenshots/$FILENAME.png" # where you will view the files
+
+scrot -e "mv \$f $FILENAME.png"
+
+scp "$FILENAME.png" $SERVER:$DIR
+
+rm "$FILENAME.png"
+
+echo "http://$SITE"
